@@ -2,12 +2,12 @@ require 'rails_helper'
 
 describe Board do
   let(:board) do
-    Board.build_board
+    Board.create.build_board
   end
 
-  describe "build_board" do
+  describe "Sets up board correctly" do
     context "Should name spaces correctly" do
-
+      # board = test.build_board
       cols = %w(h g f e d c b a)
       ids = []
       8.times do |i|
@@ -16,19 +16,17 @@ describe Board do
         ids << row
       end
 
-      it "[0][0] is named 'h1'" do
-        p board[0][0]
-        expect(board[0][0][:name]).to eq('h1')
+      8.times do |row|
+        8.times do |col|
+          expected_name = ids[row][col][:name]
+          it "[#{row}][#{col}] is named #{expected_name}" do
+            expect(board[row][col][:name]).to eq(expected_name)
+          end
+        end
       end
-      # 8.times do |row|
-      #   8.times do |col|
-      #     expected_name = ids[row][col][:name]
-      #     it "[#{row}][#{col}] is named #{expected_name}" do
-      #       expect(board[row][col][:name]).to eq(expected_name)
-      #     end
-      #   end
-      # end
     end
+
+    context "Pieces start in the correct locations "
   end
   # it "Should initiate board with pieces in correct locations" do
 
