@@ -12,7 +12,9 @@ describe Board do
   def expect_pawns_are_in_place_for(a_board)
     8.times do |col|
       expect(a_board[6][col][:content]).to eq('wPawn.png')
+      expect(a_board[1][col][:content]).to eq('bPawn.png')
     end
+
   end
 
   let(:board) do
@@ -42,13 +44,8 @@ describe Board do
       end
 
     context "Pieces start in the correct locations" do
-      it "black pawns are correctly placed" do
-        8.times do |col|
-          expect(board[1][col][:content]).to eq('bPawn.png')
-        end
-      end
 
-      it "white pawns are correctly placed" do
+      it "pawns are correctly placed" do
         expect_pawns_are_in_place_for(board)
       end
 
@@ -85,12 +82,9 @@ describe Board do
             " pieces in their starting positions" do
       it "generates an empty board data structure" do
         expect {
-          p Board.count
           a_board = described_class.create_empty_board
           a_board.save!
           a_board = Board.last
-          p a_board.state[0][0]['content']
-          p Board.count
           expect(a_board.state[0][0][:content]).to eq('bRook.png')
           expect_empty_spaces_for(a_board.state)
           expect_pawns_are_in_place_for(a_board.state)
